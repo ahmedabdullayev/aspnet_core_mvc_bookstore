@@ -41,6 +41,8 @@
   </div>
 </nav>
 
+@await RenderSectionAsync("breadcrumb", false)
+
 <main role="main">
   @RenderBody()
 </main>
@@ -54,4 +56,7 @@
 </body>
 <script src="~/lib/twitter-bootstrap/js/bootstrap.bundle.min.js"> </script>
 <script src="~/lib/jquery/jquery.js"></script>
+
+@await RenderSectionAsync("scripts", false)
+
 </html>
