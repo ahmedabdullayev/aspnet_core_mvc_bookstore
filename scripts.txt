@@ -1,0 +1,5 @@
+dotnet ef migrations add InitialMigration --project DAL --startup-project TicTacToeExercice
+dotnet ef database update  --project DAL --startup-project TicTacToeExercice
+dotnet ef database drop  --project DAL --startup-project TicTacToeExercice
+
+libman install jquery@3.6.0 --provider cdnjs --destination wwwroot/lib/jquery
