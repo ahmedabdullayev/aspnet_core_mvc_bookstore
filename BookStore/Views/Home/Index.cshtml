@@ -1,14 +1,14 @@
 @{
-  var data = ViewBag.Data;
-  
+  var bookInfo = ViewData["book"] as BookModel;
+
+  ViewData["Title"] = "Home";
 }
  @section breadcrumb
   {
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="#">Home - @ViewBag.Title</a></li>
-        <br/>@data.Id
-        <br/>AUthor = @ViewBag.Type.Author
+        <br/>AUthor = @bookInfo?.Author
       </ol>
     </nav>
   }

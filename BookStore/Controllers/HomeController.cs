@@ -8,15 +8,8 @@ namespace BookStore.Controllers
     {
         public ViewResult Index()
         {
-            ViewBag.Title = "Home Page";
-
-            dynamic data = new ExpandoObject();
-            data.Id = 1;
-            data.Name = "Ahma";
-
-            ViewBag.Data = data;
-
-            ViewBag.Type = new BookModel() {Id = 5, Author = "Ahmed Abdullajev"};
+            
+            ViewData["book"] = new BookModel() {Id = 5, Author = "Ahmed Abdullajev"};
 
             return View();
         }
