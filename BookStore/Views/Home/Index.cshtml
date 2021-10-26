@@ -1,14 +1,17 @@
+@* @{ *@
+@* *@
+@*   ViewData["Title"] = "Home"; *@
+@* } *@
 @{
-  var bookInfo = ViewData["book"] as BookModel;
-
-  ViewData["Title"] = "Home";
+  var book = ViewData["Book"] as BookModel;
 }
  @section breadcrumb
   {
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="#">Home - @ViewBag.Title</a></li>
-        <br/>AUthor = @bookInfo?.Author
+        <br/> @ViewData["CustomProperty"]
+        <br/> @book?.Title
       </ol>
     </nav>
   }
