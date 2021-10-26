@@ -1,11 +1,11 @@
 @{
-    ViewData["Title"] = "Book detail " + Model.Title;
+    ViewData["Title"] = "Book detail " + Model.book.Title;
 }
-@model BookModel
+@* @model BookModel *@
 
 
 <div class="container">
-  <h1>Book details</h1>
+  <h1>Book details | @Model.Name</h1>
     <div class="row">
         <div class="col-md-6">
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
@@ -38,21 +38,21 @@
         <div class="col-md-6">
             <div class="row">
                 <div class="col-md-12">
-                    <h1>@Model.Title</h1>
+                    <h1>@Model.book.Title</h1>
                 </div>
             </div>
     
             <div class="row">
                 <div class="col-md-12 text-primary">
                     <span class="label label-primary">By: </span>
-                    <span class="monospaced">@Model.Author</span>
+                    <span class="monospaced">@Model.book.Author</span>
                 </div>
             </div>
     
             <div class="row">
                 <div class="col-md-12">
                     <p class="description">
-                        @Model.Description
+                        @Model.book.Description
                     </p>
                 </div>
             </div>
@@ -68,9 +68,9 @@
             <hr />
     
             <ul class="list-group">
-                <li class="list-group-item"><span class="font-weight-bold">Category - </span> @Model.Category</li>
-                <li class="list-group-item"><span class="font-weight-bold">Total pages - </span> @Model.TotalPages</li>
-                <li class="list-group-item"><span class="font-weight-bold">Language - </span> @Model.Language</li>
+                <li class="list-group-item"><span class="font-weight-bold">Category - </span> @Model.book.Category</li>
+                <li class="list-group-item"><span class="font-weight-bold">Total pages - </span> @Model.book.TotalPages</li>
+                <li class="list-group-item"><span class="font-weight-bold">Language - </span> @Model.book.Language</li>
             </ul>
         </div>
     </div>
