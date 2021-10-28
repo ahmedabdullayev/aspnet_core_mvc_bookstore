@@ -1,14 +1,58 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using BookStore.Data;
 using BookStore.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.Repository
 {
     public class BookRepository
     {
-        public List<BookModel> GetAllBooks()
+        private readonly BookStoreContext _context;
+
+        public BookRepository(BookStoreContext context)
         {
-            return DataSource();
+            _context = context;
+        }
+        public async Task<int> AddNewBook(BookModel model)
+        {
+            var newBook = new Books()
+            {
+                Author = model.Author,
+                CreatedOn = DateTime.UtcNow,
+                Description = model.Description,
+                Title = model.Title,
+                TotalPages = model.TotalPages,
+                UpdatedOn = DateTime.UtcNow,
+            };
+           await _context.Books.AddAsync(newBook);
+           await _context.SaveChangesAsync();
+
+            return newBook.Id;
+        }
+        public async Task<List<BookModel>> GetAllBooks()
+        {
+            var books = new List<BookModel>();
+            var allBooks = await _context.Books.ToListAsync();
+            if (allBooks?.Any() == true)
+            {
+                foreach (var book in allBooks)
+                {
+                    books.Add(new BookModel()
+                    {
+                        Author = book.Author,
+                        Category = book.Category,
+                        Description = book.Description,
+                        Id = book.Id,
+                        Language = book.Language,
+                        Title = book.Title,
+                        TotalPages = book.TotalPages,
+                    });
+                }
+            }
+            return books;
         }
 
         public BookModel GetBookById(int id)

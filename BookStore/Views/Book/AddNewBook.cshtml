@@ -1,0 +1,42 @@
+@model BookModel
+
+@{
+    ViewBag.Title = "Add new Book";
+    Layout = "_Layout";
+}
+
+
+
+<div class="container">
+    <h2>Add new book</h2>
+    @if (ViewBag.isSuccess)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Succes!</strong> Book has been added. <br/>
+            Click <a asp-controller="Book" asp-action="GetBook" asp-route-id="@ViewBag.BookId">here</a> 
+            to view description of this book.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    
+    <form method="post" asp-action="AddNewBook" asp-controller="Book">
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label" asp-for="Title"></label>
+            <input type="text" class="form-control" id="exampleInputEmail1" asp-for="Title" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label" asp-for="Author"></label>
+            <input type="text" class="form-control" asp-for="Author" id="exampleInputPassword1">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label" asp-for="Description"></label>
+            <textarea class="form-control" asp-for="Description"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label" asp-for="TotalPages"></label>
+            <input type="text" class="form-control" asp-for="TotalPages" id="exampleInputPassword1">
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
