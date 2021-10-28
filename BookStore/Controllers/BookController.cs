@@ -62,6 +62,7 @@ namespace BookStore.Controllers
             }
             // ViewBag.IsSuccess = false;
             // ViewBag.BookId = 0;
+            ModelState.AddModelError("", "This is my custom error msg");
             return View();
         }
     }

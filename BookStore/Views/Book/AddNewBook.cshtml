@@ -20,6 +20,8 @@
     }
     
     <form method="post" asp-action="AddNewBook" asp-controller="Book">
+        <div asp-validation-summary="All"></div>
+        <div asp-validation-summary="ModelOnly"></div>
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label" asp-for="Title"></label>
             <input type="text" class="form-control" id="exampleInputEmail1" asp-for="Title" aria-describedby="emailHelp">
@@ -39,7 +41,7 @@
             <input type="text" class="form-control" asp-for="TotalPages" id="exampleInputPassword1">
             <span asp-validation-for="TotalPages" class="text-danger"></span>
         </div>
-        
+
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
