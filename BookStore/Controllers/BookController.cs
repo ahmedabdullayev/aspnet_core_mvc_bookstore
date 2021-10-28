@@ -23,11 +23,13 @@ namespace BookStore.Controllers
             return View(data);
         }
         
-        public ViewResult GetBook(int id, string title)
+        public async Task<ViewResult> GetBook(int id, string title)
         {
             dynamic data = new System.Dynamic.ExpandoObject();
-            data.book = _bookRepository.GetBookById(id);
+            data.book = await _bookRepository.GetBookById(id);
             data.Name = "Ahmad";
+            //var obj = await _bookRepository.GetBookById(id);
+            
             return View(data);
         }
 
@@ -46,11 +48,20 @@ namespace BookStore.Controllers
         [HttpPost]
         public async Task<IActionResult> AddNewBook(BookModel bookModel)
         {
-            int id = await _bookRepository.AddNewBook(bookModel);
-            if (id > 0)
+            if (ModelState.IsValid)
             {
-                return RedirectToAction("AddNewBook", new {isSuccess = true, bookId = id});
+                int id = await _bookRepository.AddNewBook(bookModel);
+                if (id > 0)
+                {
+                    return RedirectToAction("AddNewBook", new {isSuccess = true, bookId = id});
+                }
             }
+            else
+            {
+                
+            }
+            // ViewBag.IsSuccess = false;
+            // ViewBag.BookId = 0;
             return View();
         }
     }

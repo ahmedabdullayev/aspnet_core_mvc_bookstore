@@ -9,7 +9,7 @@
 
 <div class="container">
     <h2>Add new book</h2>
-    @if (ViewBag.isSuccess)
+    @if (ViewBag.isSuccess == true)
     {
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <strong>Succes!</strong> Book has been added. <br/>
@@ -23,10 +23,12 @@
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label" asp-for="Title"></label>
             <input type="text" class="form-control" id="exampleInputEmail1" asp-for="Title" aria-describedby="emailHelp">
+            <span asp-validation-for="Title" class="text-danger"></span>
         </div>
         <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label" asp-for="Author"></label>
             <input type="text" class="form-control" asp-for="Author" id="exampleInputPassword1">
+            <span asp-validation-for="Author" class="text-danger"></span>
         </div>
         <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label" asp-for="Description"></label>
@@ -35,6 +37,7 @@
         <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label" asp-for="TotalPages"></label>
             <input type="text" class="form-control" asp-for="TotalPages" id="exampleInputPassword1">
+            <span asp-validation-for="TotalPages" class="text-danger"></span>
         </div>
         
         <button type="submit" class="btn btn-primary">Submit</button>
