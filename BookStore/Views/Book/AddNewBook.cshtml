@@ -23,22 +23,32 @@
         <div asp-validation-summary="All"></div>
         <div asp-validation-summary="ModelOnly"></div>
         <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label" asp-for="Title"></label>
+            <label  class="form-label" asp-for="Language"></label>
+            <select asp-for="Language" class="form-control">
+                <option value="">Please select language of the book</option>
+                <option value="English">English</option>
+                <option value="Spanish">Spanish</option>
+                <option value="Estonian">Estonian</option>
+            </select>
+            <span asp-validation-for="Language" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" asp-for="Title"></label>
             <input type="text" class="form-control" id="exampleInputEmail1" asp-for="Title" aria-describedby="emailHelp">
             <span asp-validation-for="Title" class="text-danger"></span>
         </div>
         <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label" asp-for="Author"></label>
-            <input type="text" class="form-control" asp-for="Author" id="exampleInputPassword1">
+            <label class="form-label" asp-for="Author"></label>
+            <input type="text" class="form-control" asp-for="Author" >
             <span asp-validation-for="Author" class="text-danger"></span>
         </div>
         <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label" asp-for="Description"></label>
+            <label class="form-label" asp-for="Description"></label>
             <textarea class="form-control" asp-for="Description"></textarea>
         </div>
         <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label" asp-for="TotalPages"></label>
-            <input type="text" class="form-control" asp-for="TotalPages" id="exampleInputPassword1">
+            <label class="form-label" asp-for="TotalPages"></label>
+            <input type="text" class="form-control" asp-for="TotalPages" >
             <span asp-validation-for="TotalPages" class="text-danger"></span>
         </div>
 

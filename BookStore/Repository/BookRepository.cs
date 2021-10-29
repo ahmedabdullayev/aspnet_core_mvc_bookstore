@@ -24,6 +24,7 @@ namespace BookStore.Repository
                 CreatedOn = DateTime.UtcNow,
                 Description = model.Description,
                 Title = model.Title,
+                Language = model.Language,
                 TotalPages = model.TotalPages ?? 0,
                 UpdatedOn = DateTime.UtcNow,
             };
