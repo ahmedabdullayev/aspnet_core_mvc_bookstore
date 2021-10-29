@@ -8,7 +8,7 @@
 
 
 <div class="container">
-    <h2>Add new book</h2>
+    <h2>Add new book | @Model.Languages.Count</h2>
     @if (ViewBag.isSuccess == true)
     {
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -24,11 +24,8 @@
         <div asp-validation-summary="ModelOnly"></div>
         <div class="mb-3">
             <label  class="form-label" asp-for="Language"></label>
-            <select asp-for="Language" class="form-control">
-                <option value="">Please select language of the book</option>
-                <option value="English">English</option>
-                <option value="Spanish">Spanish</option>
-                <option value="Estonian">Estonian</option>
+            <select asp-for="Language" class="form-control" asp-items="new SelectList(Model.Languages)">
+                <option value="">Please choose your language</option>
             </select>
             <span asp-validation-for="Language" class="text-danger"></span>
         </div>

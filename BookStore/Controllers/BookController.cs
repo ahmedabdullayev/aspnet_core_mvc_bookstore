@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using BookStore.Models;
 using BookStore.Repository;
+using BookStore.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookStore.Controllers
@@ -40,13 +41,19 @@ namespace BookStore.Controllers
 
         public ViewResult AddNewBook(bool isSuccess = false, int bookId = 0)
         {
-            var model = new BookModel()
+            // var model = new BookModel()
+            // {
+            //     Language = "English"
+            // };
+            ViewBag.Language = new List<string>() {"English", "Spanish", "Estonian"};
+            var bookModel = new BookModel();
+            bookModel.Languages = new List<string>()
             {
-                Language = "English"
+                "English", "Estonian", "French"
             };
             ViewBag.IsSuccess = isSuccess;
             ViewBag.BookId = bookId;
-            return View(model);
+            return View(bookModel);
         }
 
         [HttpPost]
