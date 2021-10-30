@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using BookStore.Models;
 using BookStore.Repository;
-using BookStore.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookStore.Controllers
@@ -45,11 +44,13 @@ namespace BookStore.Controllers
             // {
             //     Language = "English"
             // };
-            ViewBag.Language = new List<string>() {"English", "Spanish", "Estonian"};
+          //  ViewBag.Language = new List<string>() {"English", "Spanish", "Estonian"};
             var bookModel = new BookModel();
-            bookModel.Languages = new List<string>()
+            bookModel.Languages = new List<LanguageModel>()
             {
-                "English", "Estonian", "French"
+                new LanguageModel() {Id = 1, Text = "Italian"},
+                new LanguageModel() {Id = 2, Text = "English"},
+                new() {Id = 3, Text = "Estonian"}
             };
             ViewBag.IsSuccess = isSuccess;
             ViewBag.BookId = bookId;
@@ -71,10 +72,27 @@ namespace BookStore.Controllers
             {
                 
             }
+            var book = new BookModel();
+            book.Languages = new List<LanguageModel>()
+            {
+                new LanguageModel() {Id = 1, Text = "Italian"},
+                new LanguageModel() {Id = 2, Text = "English"},
+                new() {Id = 3, Text = "Estonian"}
+            };
             // ViewBag.IsSuccess = false;
             // ViewBag.BookId = 0;
             ModelState.AddModelError("", "This is my custom error msg");
-            return View();
+            return View(book);
+        }
+
+        private List<LanguageModel> GetLanguage()
+        {
+            return new List<LanguageModel>()
+            {
+                new LanguageModel() {Id = 1, Text = "Italian"},
+                new LanguageModel() {Id = 2, Text = "English"},
+                new() {Id = 3, Text = "Estonian"}
+            };
         }
     }
 }

@@ -20,7 +20,7 @@ namespace BookStore.Models
         [Display(Name = "Total pages of book")]
         public int? TotalPages { get; set; }
 
-        public List<string> Languages { get; set; }
+        public List<LanguageModel> Languages { get; set; }
 
     }
 }
