@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using BookStore.Models;
 using BookStore.Repository;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BookStore.Controllers
 {
@@ -52,6 +54,12 @@ namespace BookStore.Controllers
                 new LanguageModel() {Id = 2, Text = "English"},
                 new() {Id = 3, Text = "Estonian"}
             };
+
+            bookModel.SelectListItems = GetLanguage().Select(x => new SelectListItem()
+            {
+                Text = x.Text,
+                Value = x.Id.ToString(),
+            }).ToList();
             ViewBag.IsSuccess = isSuccess;
             ViewBag.BookId = bookId;
             return View(bookModel);
@@ -68,10 +76,6 @@ namespace BookStore.Controllers
                     return RedirectToAction("AddNewBook", new {isSuccess = true, bookId = id});
                 }
             }
-            else
-            {
-                
-            }
             var book = new BookModel();
             book.Languages = new List<LanguageModel>()
             {
@@ -79,9 +83,15 @@ namespace BookStore.Controllers
                 new LanguageModel() {Id = 2, Text = "English"},
                 new() {Id = 3, Text = "Estonian"}
             };
+            book.SelectListItems = GetLanguage().Select(x => new SelectListItem()
+            {
+                Text = x.Text,
+                Value = x.Id.ToString(),
+                Selected = true
+            }).ToList();
             // ViewBag.IsSuccess = false;
             // ViewBag.BookId = 0;
-            ModelState.AddModelError("", "This is my custom error msg");
+          //  ModelState.AddModelError("", "This is my custom error msg");
             return View(book);
         }
 

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BookStore.Models
 {
@@ -21,6 +22,8 @@ namespace BookStore.Models
         public int? TotalPages { get; set; }
 
         public List<LanguageModel> Languages { get; set; }
+        
+        public List<SelectListItem> SelectListItems { get; set; }
 
     }
 }
