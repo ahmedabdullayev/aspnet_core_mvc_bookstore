@@ -1,3 +1,4 @@
+@using BookStore.Enums
 @model BookModel
 
 @{
@@ -8,7 +9,7 @@
 
 
 <div class="container">
-    <h2>Add new book | @Model.Languages.Count</h2>
+    <h2>Add new book</h2>
     @if (ViewBag.isSuccess == true)
     {
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -23,13 +24,13 @@
         <div asp-validation-summary="All"></div>
         <div asp-validation-summary="ModelOnly"></div>
         <div class="mb-3">
-            <label  class="form-label" asp-for="Language"></label>
-            <select asp-for="MultiLanguage" class="form-control" asp-items='@Model.SelectListItems' multiple>
+            <label  class="form-label" asp-for="LanguageEnum"></label>
+            <select asp-for="LanguageEnum" class="form-control" asp-items="Html.GetEnumSelectList<LanguageEnum>()">
             @* <select asp-for="Language" class="form-control" asp-items='new SelectList(Model.Languages, "Id", "Text", Model.Languages.First().Id)'> *@
                 <option value="">Please choose your language</option>
 
             </select>
-            <span asp-validation-for="Language" class="text-danger"></span>
+            <span asp-validation-for="LanguageEnum" class="text-danger"></span>
         </div>
         <div class="mb-3">
             <label class="form-label" asp-for="Title"></label>

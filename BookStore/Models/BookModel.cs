@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using BookStore.Enums;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BookStore.Models
@@ -19,7 +20,7 @@ namespace BookStore.Models
         public string Language { get; set; }
         
         [Required(ErrorMessage = "Please choose languages of your book")]
-        public List<string> MultiLanguage { get; set; }
+        public LanguageEnum LanguageEnum { get; set; }
 
         [Required(ErrorMessage = "Please enter the total pages")]
         [Display(Name = "Total pages of book")]

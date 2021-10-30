@@ -47,22 +47,22 @@ namespace BookStore.Controllers
             //     Language = "English"
             // };
           //  ViewBag.Language = new List<string>() {"English", "Spanish", "Estonian"};
-            var bookModel = new BookModel();
-            bookModel.Languages = new List<LanguageModel>()
-            {
-                new LanguageModel() {Id = 1, Text = "Italian"},
-                new LanguageModel() {Id = 2, Text = "English"},
-                new() {Id = 3, Text = "Estonian"}
-            };
-
-            bookModel.SelectListItems = GetLanguage().Select(x => new SelectListItem()
-            {
-                Text = x.Text,
-                Value = x.Id.ToString(),
-            }).ToList();
+            // var bookModel = new BookModel();
+            // bookModel.Languages = new List<LanguageModel>()
+            // {
+            //     new LanguageModel() {Id = 1, Text = "Italian"},
+            //     new LanguageModel() {Id = 2, Text = "English"},
+            //     new() {Id = 3, Text = "Estonian"}
+            // };
+            //
+            // bookModel.SelectListItems = GetLanguage().Select(x => new SelectListItem()
+            // {
+            //     Text = x.Text,
+            //     Value = x.Id.ToString(),
+            // }).ToList();
             ViewBag.IsSuccess = isSuccess;
             ViewBag.BookId = bookId;
-            return View(bookModel);
+            return View();
         }
 
         [HttpPost]
@@ -76,23 +76,24 @@ namespace BookStore.Controllers
                     return RedirectToAction("AddNewBook", new {isSuccess = true, bookId = id});
                 }
             }
-            var book = new BookModel();
-            book.Languages = new List<LanguageModel>()
-            {
-                new LanguageModel() {Id = 1, Text = "Italian"},
-                new LanguageModel() {Id = 2, Text = "English"},
-                new() {Id = 3, Text = "Estonian"}
-            };
-            book.SelectListItems = GetLanguage().Select(x => new SelectListItem()
-            {
-                Text = x.Text,
-                Value = x.Id.ToString(),
-                Selected = true
-            }).ToList();
-            // ViewBag.IsSuccess = false;
-            // ViewBag.BookId = 0;
-          //  ModelState.AddModelError("", "This is my custom error msg");
-            return View(book);
+          //   var book = new BookModel();
+          //   book.Languages = new List<LanguageModel>()
+          //   {
+          //       new LanguageModel() {Id = 1, Text = "Italian"},
+          //       new LanguageModel() {Id = 2, Text = "English"},
+          //       new() {Id = 3, Text = "Estonian"}
+          //   };
+          //   book.SelectListItems = GetLanguage().Select(x => new SelectListItem()
+          //   {
+          //       Text = x.Text,
+          //       Value = x.Id.ToString(),
+          //       Selected = true
+          //   }).ToList();
+          //   // ViewBag.IsSuccess = false;
+          //   // ViewBag.BookId = 0;
+          // //  ModelState.AddModelError("", "This is my custom error msg");
+          //   return View(book);
+          return View();
         }
 
         private List<LanguageModel> GetLanguage()
