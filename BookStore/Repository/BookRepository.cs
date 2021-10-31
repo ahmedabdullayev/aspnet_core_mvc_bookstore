@@ -36,7 +36,8 @@ namespace BookStore.Repository
         public async Task<List<BookModel>> GetAllBooks()
         {
             var books = new List<BookModel>();
-            var allBooks = await _context.Books.ToListAsync();
+            var allBooks = await _context.Books.Include(l => l.Language).ToListAsync();
+            Console.WriteLine(allBooks.Select(x => x.Language.Name).First());
             if (allBooks?.Any() == true)
             {
                 foreach (var book in allBooks)
@@ -48,7 +49,7 @@ namespace BookStore.Repository
                         Description = book.Description,
                         Id = book.Id,
                         LanguageId = book.LanguageId,
-                       // Language = book.Language.Name,
+                        Language = book.Language.Name,
                         Title = book.Title,
                         TotalPages = book.TotalPages,
                     });
