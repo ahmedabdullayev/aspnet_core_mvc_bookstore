@@ -7,3 +7,5 @@ libman install jquery@3.6.0 --provider cdnjs --destination wwwroot/lib/jquery
 libman install jquery-validate --provider cdnjs --destination wwwroot/lib/jquery-validate
 
 libman install jquery-validation-unobtrusive --provider cdnjs --destination wwwroot/lib/jquery-validation-unobtrusive
+
+libman install jquery-ajax-unobtrusive --provider cdnjs --destination wwwroot/lib/jquery-ajax-unobtrusive

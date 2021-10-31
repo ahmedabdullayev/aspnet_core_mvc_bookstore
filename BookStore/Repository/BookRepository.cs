@@ -21,11 +21,12 @@ namespace BookStore.Repository
             var newBook = new Books()
             {
                 Author = model.Author,
-                CreatedOn = DateTime.UtcNow,
                 Description = model.Description,
                 Title = model.Title,
                 LanguageId = model.LanguageId ?? 0,
                 TotalPages = model.TotalPages ?? 0,
+                CoverImageUrl = model.CoverImageUrl,
+                CreatedOn = DateTime.UtcNow,
                 UpdatedOn = DateTime.UtcNow,
             };
            await _context.Books.AddAsync(newBook);
@@ -52,6 +53,7 @@ namespace BookStore.Repository
                         Language = book.Language.Name,
                         Title = book.Title,
                         TotalPages = book.TotalPages,
+                        CoverImageUrl = book.CoverImageUrl,
                     });
                 }
             }

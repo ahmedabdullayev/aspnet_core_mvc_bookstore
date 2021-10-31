@@ -5,6 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Folder Include="wwwroot\books\cover" />
       <Folder Include="wwwroot\js" />
     </ItemGroup>
 
