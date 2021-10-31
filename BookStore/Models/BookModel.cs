@@ -18,6 +18,7 @@ namespace BookStore.Models
         [StringLength(255, MinimumLength = 5)]
         public string Description { get; set; }
         public string Category { get; set; }
+        [Display(Name = "Language of the book")]
         [Required(ErrorMessage = "Please choose language for your book")]
         public int? LanguageId { get; set; }
         public string Language { get; set; }

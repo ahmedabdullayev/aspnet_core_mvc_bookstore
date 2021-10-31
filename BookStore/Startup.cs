@@ -26,6 +26,8 @@ namespace BookStore
             
             services.AddControllersWithViews();
             services.AddRazorPages().AddRazorRuntimeCompilation();
+                 // TO REMOVE CLIENt SIDE VALIDATIONS ↓
+                // .AddViewOptions(option => option.HtmlHelperOptions.ClientValidationEnabled = false);
             services.AddScoped<BookRepository, BookRepository>(); //dependency
             services.AddScoped<LanguageRepository, LanguageRepository>(); //dependency
         }

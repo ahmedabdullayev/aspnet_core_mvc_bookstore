@@ -21,8 +21,8 @@
     }
     
     <form method="post" asp-action="AddNewBook" asp-controller="Book">
-        <div asp-validation-summary="All"></div>
-        <div asp-validation-summary="ModelOnly"></div>
+        @* <div asp-validation-summary="All"></div> *@
+        @* <div asp-validation-summary="ModelOnly"></div> *@
         <div class="mb-3">
             <label  class="form-label" asp-for="LanguageId"></label>
             @* <select asp-for="LanguageId" class="form-control" asp-items="Html.GetEnumSelectList<LanguageEnum>()"> *@
@@ -45,6 +45,7 @@
         <div class="mb-3">
             <label class="form-label" asp-for="Description"></label>
             <textarea class="form-control" asp-for="Description"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
         </div>
         <div class="mb-3">
             <label class="form-label" asp-for="TotalPages"></label>
