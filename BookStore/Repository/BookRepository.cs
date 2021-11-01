@@ -50,7 +50,6 @@ namespace BookStore.Repository
         {
             var books = new List<BookModel>();
             var allBooks = await _context.Books.Include(l => l.Language).ToListAsync();
-            Console.WriteLine(allBooks.Select(x => x.Language.Name).First());
             if (allBooks?.Any() == true)
             {
                 foreach (var book in allBooks)
@@ -70,6 +69,22 @@ namespace BookStore.Repository
                 }
             }
             return books;
+        }
+        public async Task<List<BookModel>> GetTopBooksAsync()
+        {
+            return await _context.Books
+                .Select(book => new BookModel()
+                {
+                    Author = book.Author,
+                    Category = book.Category,
+                    Description = book.Description,
+                    Id = book.Id,
+                    LanguageId = book.LanguageId,
+                    Language = book.Language.Name,
+                    Title = book.Title,
+                    TotalPages = book.TotalPages,
+                    CoverImageUrl = book.CoverImageUrl,
+                }).Take(5).ToListAsync();
         }
 
         public async Task<BookModel> GetBookById(int id)

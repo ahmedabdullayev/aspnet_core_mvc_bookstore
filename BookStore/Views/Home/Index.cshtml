@@ -38,21 +38,26 @@
 
 <div class="album py-5 bg-light">
   <div class="container">
-
     <div class="row">
-      <h1>Top books</h1>
-      <div class="col-md-4">
-        @* <partial name="_bookThumbnail" model="new BookModel()"/> *@
-        @Html.Partial("_bookThumbnail",new BookModel())
-      </div>
-      <div class="col-md-4">
-        <partial name="_bookThumbnail" model="new BookModel()"/>
-      </div>
-      <div class="col-md-4">
-       @{ await Html.RenderPartialAsync("_bookThumbnail", new BookModel()); }
-      </div>
-
+      @* @await Component.InvokeAsync("TopBooks") *@
+      <vc:top-books></vc:top-books>
+          
     </div>
+    @* <div class="row"> *@
+    @*   @await Component.InvokeAsync("TopBooks") *@
+    @*   <vc:top-books></vc:top-books> *@
+    @*   <h1>Top books</h1> *@
+    @*   <div class="col-md-4"> *@
+    @*     $1$ <partial name="_bookThumbnail" model="new BookModel()"/> #1# *@
+    @*     @Html.Partial("_bookThumbnail", new BookModel()) *@
+    @*   </div> *@
+    @*   <div class="col-md-4"> *@
+    @*     <partial name="_bookThumbnail" model="new BookModel()"/> *@
+    @*   </div> *@
+    @*   <div class="col-md-4"> *@
+    @*     @{ await Html.RenderPartialAsync("_bookThumbnail", new BookModel()); } *@
+    @*   </div> *@
+    @* </div> *@
   </div>
 </div>
 
