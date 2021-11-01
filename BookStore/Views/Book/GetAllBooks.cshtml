@@ -21,20 +21,23 @@
         @foreach (var book in Model)
         {
             <div class="col-md-4">
-                <div class="card shadow-sm">
-                    <img src="@book.CoverImageUrl" alt=""/>
-                    <div class="card-body">
-                        <h3 class="card-title">@book.Title</h3>
-                        <p class="card-text">@book.Description.</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <a asp-controller="Book" asp-action="GetBook" asp-route-id="@book.Id"
-                                   asp-fragment="similarBooks" class="btn btn-sm btn-outline-secondary">View</a>
-                            </div>
-                            <small class="text-muted">@book.Author</small>
-                        </div>
-                    </div>
-                </div>
+                <partial name="_bookThumbnail" model="@book"/>
+                
+                @* <div class="card shadow-sm"> *@
+                @*     <img src="@book.CoverImageUrl" alt=""/> *@
+                @*     <div class="card-body"> *@
+                @*         <h3 class="card-title">@book.Title</h3> *@
+                @*         <p class="card-text">@book.Description.</p> *@
+                @*         <div class="d-flex justify-content-between align-items-center"> *@
+                @*             <div class="btn-group"> *@
+                @*                 <a asp-controller="Book" asp-action="GetBook" asp-route-id="@book.Id" *@
+                @*                    asp-fragment="similarBooks" class="btn btn-sm btn-outline-secondary">View</a> *@
+                @*             </div> *@
+                @*             <small class="text-muted">@book.Author</small> *@
+                @*         </div> *@
+                @*     </div> *@
+                @* </div> *@
+                
             </div>
         }
         
