@@ -23,9 +23,10 @@ namespace BookStore.Controllers
             return View();
         }
 
-        public ViewResult AboutUs(int? id)
+        [Route("about-us/{id?}/{name?}")]
+        public ViewResult AboutUs(int? id, string name)
         {
-            Title = "About Us " + id;
+            Title = "About Us " + id + name;
             return View();
         }
     }
