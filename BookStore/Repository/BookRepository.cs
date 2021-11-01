@@ -26,6 +26,7 @@ namespace BookStore.Repository
                 LanguageId = model.LanguageId ?? 0,
                 TotalPages = model.TotalPages ?? 0,
                 CoverImageUrl = model.CoverImageUrl,
+                BookPdfUrl = model.BookPdfUrl,
                 CreatedOn = DateTime.UtcNow,
                 UpdatedOn = DateTime.UtcNow,
             };
@@ -106,7 +107,8 @@ namespace BookStore.Repository
                         Id    = g.Id,
                         Name = g.Name,
                         URL = g.URL
-                    }).ToList()
+                    }).ToList(),
+                    BookPdfUrl = book.BookPdfUrl
                 }).FirstOrDefaultAsync();
         }
 

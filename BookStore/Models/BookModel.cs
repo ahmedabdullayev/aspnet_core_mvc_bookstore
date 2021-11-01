@@ -40,6 +40,13 @@ namespace BookStore.Models
 
         public List<GalleryModel> Gallery { get; set; }
         
+        [Display(Name = "Upload pdf of the book")]
+        [Required]
+        public IFormFile BookPdf { get; set; } // image file
+        
+        //url for main img wwwroot/books/cover
+        public string BookPdfUrl { get; set; }
+        
         //just for dropdown of languages
         public List<LanguageModel> Languages { get; set; }
         

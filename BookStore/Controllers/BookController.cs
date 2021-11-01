@@ -89,6 +89,11 @@ namespace BookStore.Controllers
                         bookModel.Gallery.Add(gallery);
                     }
                 }
+                if (bookModel.BookPdf != null)
+                {
+                    var folder = "books/pdf/";
+                    bookModel.BookPdfUrl = await UploadImage(folder, bookModel.BookPdf);
+                }
                 int id = await _bookRepository.AddNewBook(bookModel);
                 if (id > 0)
                 {
