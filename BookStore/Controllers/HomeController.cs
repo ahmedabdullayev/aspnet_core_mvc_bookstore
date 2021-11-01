@@ -29,5 +29,19 @@ namespace BookStore.Controllers
             Title = "About Us " + id + name;
             return View();
         }
+        
+        [Route("test/a{a}")]
+        public string Test(string a)
+        {
+            return a;
+        }
+        
+        [Route("test/b{a}")]
+        public string Test1(string a)
+        {
+            return a;
+        }
+        
+        
     }
 }

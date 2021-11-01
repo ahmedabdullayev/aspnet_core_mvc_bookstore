@@ -33,6 +33,7 @@ namespace BookStore.Controllers
             return View(data);
         }
         
+         [Route("book-details/{id:int}")]
         public async Task<ViewResult> GetBook(int id, string title)
         {
             dynamic data = new System.Dynamic.ExpandoObject();
