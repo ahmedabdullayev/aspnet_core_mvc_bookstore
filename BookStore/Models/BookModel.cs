@@ -29,10 +29,18 @@ namespace BookStore.Models
 
         [Display(Name = "Choose cover photo of your image")]
         [Required]
-        public IFormFile CoverPhoto { get; set; }
+        public IFormFile CoverPhoto { get; set; } // image file
         
-        
+        //url for main img wwwroot/books/cover
         public string CoverImageUrl { get; set; }
+        
+        [Display(Name = "Choose the gallery images of your image")]
+        [Required]
+        public IFormFileCollection GalleryFiles { get; set; } // Images of one book
+
+        public List<GalleryModel> Gallery { get; set; }
+        
+        //just for dropdown of languages
         public List<LanguageModel> Languages { get; set; }
         
 

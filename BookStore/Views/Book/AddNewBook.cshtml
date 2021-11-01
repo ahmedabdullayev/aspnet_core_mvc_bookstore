@@ -54,10 +54,17 @@
         </div>
         
         <div class="mb-3">
-          <label for="formFile" asp-for="CoverPhoto" class="form-label"></label>
+            <label for="formFile" asp-for="CoverPhoto" class="form-label"></label>
             <input asp-for="CoverPhoto" class="form-control" id="formFile">
             <span asp-validation-for="CoverPhoto" class="text-danger"></span>
         </div>
+        
+        <div class="mb-3">
+            <label for="formFiles" asp-for="GalleryFiles" class="form-label"></label>
+            <input asp-for="GalleryFiles" class="form-control" id="formFiles">
+            <span asp-validation-for="GalleryFiles" class="text-danger"></span>
+        </div>
+        
 
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
