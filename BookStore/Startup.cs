@@ -56,6 +56,11 @@ namespace BookStore
                 //     name: "Default",
                 //     pattern: "bookApp/{controller=Home}/{action=Index}/{id?}"
                 // );
+                endpoints.MapControllerRoute(
+                    name: "AboutUs",
+                    pattern: "about-us/{id?}",
+                    defaults: new {controller = "Home", action = "AboutUs"}
+                );
             });
         }
     }

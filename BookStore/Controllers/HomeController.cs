@@ -23,9 +23,9 @@ namespace BookStore.Controllers
             return View();
         }
 
-        public ViewResult AboutUs()
+        public ViewResult AboutUs(int? id)
         {
-            Title = "About Us";
+            Title = "About Us " + id;
             return View();
         }
     }
