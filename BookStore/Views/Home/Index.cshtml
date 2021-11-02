@@ -1,7 +1,11 @@
+
 @* @{ *@
 @* *@
 @*   ViewData["Title"] = "Home"; *@
 @* } *@
+
+@inject BookStore.Repository.IBookRepository _bookRepository
+@inject BookStore.Repository.ILanguageRepository _languageRepository
 @{
   var book = ViewData["Book"] as BookModel;
 }
@@ -19,6 +23,14 @@
  
   <div class="row py-lg-5">
     <div class="col-lg-6 col-md-8 mx-auto">
+      @foreach (var item in await _bookRepository.GetAllBooks())
+      {
+        <h2>@item.Title </h2>
+      }
+      @foreach (var item in await _languageRepository.GetLanguages())
+            {
+              <h2>@item.Name </h2>
+            }
       <environment names="Development">
         <h5>In dev</h5>
       </environment>

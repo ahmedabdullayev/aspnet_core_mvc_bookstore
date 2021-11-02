@@ -1,6 +1,8 @@
 @using BookStore.Enums
 @model BookModel
 
+@inject BookStore.Repository.ILanguageRepository _languageRepository
+
 @{
     ViewBag.Title = "Add new Book";
     Layout = "_Layout";
@@ -26,7 +28,8 @@
         <div class="mb-3">
             <label  class="form-label" asp-for="LanguageId"></label>
             @* <select asp-for="LanguageId" class="form-control" asp-items="Html.GetEnumSelectList<LanguageEnum>()"> *@
-            <select asp-for="LanguageId" class="form-control" asp-items='new SelectList(Model.Languages, "Id", "Name", Model.Languages.First().Id)'>
+            <select asp-for="LanguageId" class="form-control" asp-items="(await _languageRepository.GetLanguages()).Select(x => new SelectListItem() {Text = x.Name, Value = x.Id.ToString(), Selected = x.Id == _languageRepository.GetLanguages().Result.First().Id})">
+            @* <select asp-for="LanguageId" class="form-control" asp-items='new SelectList(Model.Languages, "Id", "Name", Model.Languages.First().Id)'> *@
                 <option value="">Please choose your language</option>
 
             </select>

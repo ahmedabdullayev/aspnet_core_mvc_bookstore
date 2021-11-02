@@ -53,13 +53,13 @@ namespace BookStore.Controllers
         public async Task<ViewResult> AddNewBook(bool isSuccess = false, int bookId = 0)
         {
             
-            var languages = await _languageRepository.GetLanguages();
-            var bookModel = new BookModel();
-            bookModel.Languages = languages;
+            // var languages = await _languageRepository.GetLanguages();
+            // var bookModel = new BookModel();
+            // bookModel.Languages = languages;
             
             ViewBag.IsSuccess = isSuccess;
             ViewBag.BookId = bookId;
-            return View(bookModel);
+            return View();
         }
 
         [HttpPost]
@@ -101,10 +101,11 @@ namespace BookStore.Controllers
                     return RedirectToAction("AddNewBook", new {isSuccess = true, bookId = id});
                 }
             }
-            var languages = await _languageRepository.GetLanguages();
-            var model = new BookModel();
-            model.Languages = languages;
-          return View(model);
+            // var languages = await _languageRepository.GetLanguages();
+            // var model = new BookModel();
+            // model.Languages = languages;
+            // return View(model);
+            return View();
         }
 
         public async Task<string> UploadImage(string folderPath, IFormFile file)
