@@ -27,7 +27,8 @@ namespace BookStore.Controllers
             Title = "Home page";
             CustomProperty = "Custom value";
             var result = _configuration["Logging:LogLevel:Default"];
-            Book = new BookModel() {Id = 32, Title = "Good book", Author = result};
+            var result2 = _configuration.GetValue<string>("Logging:LogLevel:Microsoft");
+            Book = new BookModel() {Id = 32, Title = "Good book", Author = result2};
             
             return View();
         }

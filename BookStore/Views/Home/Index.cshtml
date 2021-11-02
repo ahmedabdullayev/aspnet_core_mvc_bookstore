@@ -1,3 +1,4 @@
+@using Microsoft.Extensions.Configuration
 
 @* @{ *@
 @* *@
@@ -6,6 +7,7 @@
 
 @inject BookStore.Repository.IBookRepository _bookRepository
 @inject BookStore.Repository.ILanguageRepository _languageRepository
+@inject Microsoft.Extensions.Configuration.IConfiguration _configuration
 @{
   var book = ViewData["Book"] as BookModel;
 }
@@ -17,6 +19,13 @@
         <br/> @ViewData["CustomProperty"]
         <br/> @book?.Title
         <br/> @book?.Author
+        @if (_configuration.GetValue<bool>("myfield:booleanField"))
+        {
+          <br/>
+          @(_configuration.GetValue<string>("myfield:test"))
+          @(_configuration.GetSection("myfield").GetValue<string>("booleanField"))
+          
+        }
       </ol>
     </nav>
   }
