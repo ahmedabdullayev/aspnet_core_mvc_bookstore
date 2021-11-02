@@ -28,8 +28,8 @@ namespace BookStore
             services.AddRazorPages().AddRazorRuntimeCompilation();
                  // TO REMOVE CLIENt SIDE VALIDATIONS ↓
                 // .AddViewOptions(option => option.HtmlHelperOptions.ClientValidationEnabled = false);
-            services.AddScoped<BookRepository, BookRepository>(); //dependency
-            services.AddScoped<LanguageRepository, LanguageRepository>(); //dependency
+            services.AddScoped<IBookRepository, BookRepository>(); //dependency inj
+            services.AddScoped<ILanguageRepository, LanguageRepository>(); //dependency inj
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
