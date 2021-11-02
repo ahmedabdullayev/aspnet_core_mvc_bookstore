@@ -1,11 +1,19 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Dynamic;
 using BookStore.Models;
+using Microsoft.Extensions.Configuration;
 
 namespace BookStore.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IConfiguration _configuration;
+
+        public HomeController(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         [ViewData]
         public string CustomProperty { get; set; }
 
@@ -18,7 +26,8 @@ namespace BookStore.Controllers
         {
             Title = "Home page";
             CustomProperty = "Custom value";
-            Book = new BookModel() {Id = 32, Title = "Good book"};
+            var result = _configuration["Logging:LogLevel:Default"];
+            Book = new BookModel() {Id = 32, Title = "Good book", Author = result};
             
             return View();
         }
