@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using BookStore.Data;
+using BookStore.Helpers;
 using BookStore.Models;
 using BookStore.Repository;
 using Microsoft.AspNetCore.Builder;
@@ -54,6 +55,8 @@ namespace BookStore
             {
                 config.LoginPath = "/login";
             });
+
+            services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, ApplicationUserClaimsPrincipalFactory>(); // Helper/Claims
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
