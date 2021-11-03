@@ -4,7 +4,17 @@
 }
 <div class="container">
 <form asp-controller="Account" asp-action="Signup" method="post">
-<div asp-validation-summary="All"></div>
+    <div asp-validation-summary="All"></div>
+    <div class="mb-3">
+            <label class="form-label" asp-for="FirstName"></label>
+            <input class="form-control" asp-for="FirstName" aria-describedby="emailHelp">
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" asp-for="LastName"></label>
+            <input class="form-control" asp-for="LastName" aria-describedby="emailHelp">
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
     <div class="mb-3">
         <label class="form-label" asp-for="Email"></label>
         <input class="form-control" asp-for="Email" aria-describedby="emailHelp">
