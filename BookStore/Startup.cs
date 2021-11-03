@@ -8,6 +8,7 @@ using BookStore.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,6 +29,9 @@ namespace BookStore
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<BookStoreContext>(options => options.UseSqlServer(_configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<BookStoreContext>(); // signup user etc
             
             services.AddControllersWithViews();
             services.AddRazorPages().AddRazorRuntimeCompilation();
@@ -35,6 +39,7 @@ namespace BookStore
                 // .AddViewOptions(option => option.HtmlHelperOptions.ClientValidationEnabled = false);
             services.AddScoped<IBookRepository, BookRepository>(); //dependency inj
             services.AddScoped<ILanguageRepository, LanguageRepository>(); //dependency inj
+            services.AddScoped<IAccountRepository, AccountRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,6 +57,8 @@ namespace BookStore
                 RequestPath = "/testImages"
             });
             app.UseRouting();
+
+            app.UseAuthentication(); // signup
             
             app.UseEndpoints(endpoints =>
             {
