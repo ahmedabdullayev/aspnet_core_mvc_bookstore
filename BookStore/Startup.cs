@@ -50,8 +50,11 @@ namespace BookStore
             services.AddScoped<IBookRepository, BookRepository>(); //dependency inj
             services.AddScoped<ILanguageRepository, LanguageRepository>(); //dependency inj
             services.AddScoped<IAccountRepository, AccountRepository>();
+            services.ConfigureApplicationCookie(config =>
+            {
+                config.LoginPath = "/login";
+            });
         }
-
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
