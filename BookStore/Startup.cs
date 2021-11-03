@@ -69,7 +69,7 @@ namespace BookStore
             app.UseRouting();
 
             app.UseAuthentication(); // signup
-            
+            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute();

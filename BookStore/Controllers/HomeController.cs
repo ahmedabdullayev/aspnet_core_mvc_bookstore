@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Dynamic;
 using BookStore.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
 
 namespace BookStore.Controllers
@@ -32,7 +33,7 @@ namespace BookStore.Controllers
             
             return View();
         }
-
+        [Authorize]
         [Route("about-us/{id?}/{name?}")]
         public ViewResult AboutUs(int? id, string name)
         {
