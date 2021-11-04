@@ -1,6 +1,8 @@
+using System;
 using System.Threading.Tasks;
 using BookStore.Models;
 using BookStore.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookStore.Controllers
@@ -69,5 +71,33 @@ namespace BookStore.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [Route("change-password")]
+        public IActionResult ChangePassword()
+        {
+            return View();
+        } 
+        
+        [HttpPost]
+        [Route("change-password")]
+        public async Task<IActionResult> ChangePassword(ChangePasswordModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Console.WriteLine("isValid");
+                var result = await _accountRepository.ChangeUserPasswordAsync(model);
+                if (result.Succeeded)
+                {
+                    ViewBag.IsSuccess = true;
+                    ModelState.Clear();
+                    return View();
+                }
+
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+            }
+            return View();
+        } 
     }
 }
