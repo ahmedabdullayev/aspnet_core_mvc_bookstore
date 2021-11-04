@@ -53,10 +53,14 @@ namespace BookStore
             services.AddScoped<ILanguageRepository, LanguageRepository>(); //dependency inj
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IEmailService, EmailService>();
             services.ConfigureApplicationCookie(config =>
             {
                 config.LoginPath = "/login";
             });
+
+            // Relationship for model and appsettings:SMTPConfig section,FOR EMAIL SEND
+            services.Configure<SMTPConfigModel>(_configuration.GetSection("SMTPConfig")); 
 
             services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, ApplicationUserClaimsPrincipalFactory>(); // Helper/Claims
         }

@@ -1,9 +1,15 @@
+using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using System.Dynamic;
+using System.Net;
+using System.Net.Mail;
+using System.Threading.Tasks;
 using BookStore.Models;
 using BookStore.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace BookStore.Controllers
 {
@@ -11,11 +17,15 @@ namespace BookStore.Controllers
     {
         private readonly IConfiguration _configuration;
         private readonly IUserService _userService;
+        private readonly IEmailService _emailService;
+        private readonly SMTPConfigModel _smtpConfig;
 
-        public HomeController(IConfiguration configuration, IUserService userService)
+        public HomeController(IConfiguration configuration, IUserService userService, IEmailService emailService, IOptions<SMTPConfigModel> smtpConfig)
         {
             _configuration = configuration;
             _userService = userService;
+            _emailService = emailService;
+            _smtpConfig = smtpConfig.Value;
         }
 
         [ViewData]
@@ -26,10 +36,38 @@ namespace BookStore.Controllers
 
         [ViewData]
         public BookModel Book { get; set; }
-        public ViewResult Index()
+        public async Task<ViewResult> Index()
         {
-            var userId = _userService.GetUserId();
-            var isUserLoggedIn = _userService.IsAuthenticated();
+            // var client = new SmtpClient("smtp.mailtrap.io", 2525)
+            // {
+            //     Credentials = new NetworkCredential("9a403a46310b41", "16e28e18036665"),
+            //     EnableSsl = true
+            // };
+            // client.Send("from@example.com", "to@example.com", "Hello world", "testbody");
+            // Console.WriteLine("Sent");
+            // Console.ReadLine();
+            var smtpConfigModel = _smtpConfig;
+            Console.WriteLine(smtpConfigModel);
+            Console.WriteLine(smtpConfigModel.Host);
+            Console.WriteLine(smtpConfigModel.Password);
+            Console.WriteLine(smtpConfigModel.Port);
+            Console.WriteLine(smtpConfigModel.SenderAddress);
+            Console.WriteLine(smtpConfigModel.UserName);
+            Console.WriteLine(smtpConfigModel.SenderDisplayName);
+            Console.WriteLine(smtpConfigModel.UseDefaultCredentials);
+            Console.WriteLine(smtpConfigModel.EnableSSL);
+            Console.WriteLine(smtpConfigModel.IsBodyHTML);
+            UserEmailOptions options = new UserEmailOptions
+            {
+                ToEmails = new List<string>() {"test@gmail.com"},
+                PlaceHolders = new List<KeyValuePair<string, string>>()
+                {
+                    new KeyValuePair<string, string>("{{UserName}}", "ahabdu")
+                }
+            };
+            await _emailService.SendTestEmail(options);
+            // var userId = _userService.GetUserId();
+            // var isUserLoggedIn = _userService.IsAuthenticated();
             
             Title = "Home page";
             CustomProperty = "Custom value";
