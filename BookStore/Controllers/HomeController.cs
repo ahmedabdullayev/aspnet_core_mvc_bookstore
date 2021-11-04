@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Dynamic;
 using BookStore.Models;
+using BookStore.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
 
@@ -9,10 +10,12 @@ namespace BookStore.Controllers
     public class HomeController : Controller
     {
         private readonly IConfiguration _configuration;
+        private readonly IUserService _userService;
 
-        public HomeController(IConfiguration configuration)
+        public HomeController(IConfiguration configuration, IUserService userService)
         {
             _configuration = configuration;
+            _userService = userService;
         }
 
         [ViewData]
@@ -25,6 +28,9 @@ namespace BookStore.Controllers
         public BookModel Book { get; set; }
         public ViewResult Index()
         {
+            var userId = _userService.GetUserId();
+            var isUserLoggedIn = _userService.IsAuthenticated();
+            
             Title = "Home page";
             CustomProperty = "Custom value";
             var result = _configuration["Logging:LogLevel:Default"];
