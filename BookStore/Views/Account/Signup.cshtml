@@ -3,9 +3,13 @@
     Layout = "_Layout";
 }
 <div class="container">
-<form asp-controller="Account" asp-action="Signup" method="post">
-    <div asp-validation-summary="All"></div>
-    <div class="mb-3">
+    <form asp-controller="Account" asp-action="Signup" method="post">
+        @if (Model.Success != null && Model.Success == true)
+        {
+            <h1> You registered successfuly, please confirm your email, to login!</h1>
+        }
+        <div asp-validation-summary="All"></div>
+        <div class="mb-3">
             <label class="form-label" asp-for="FirstName"></label>
             <input class="form-control" asp-for="FirstName" aria-describedby="emailHelp">
             <span asp-validation-for="FirstName" class="text-danger"></span>
@@ -15,21 +19,21 @@
             <input class="form-control" asp-for="LastName" aria-describedby="emailHelp">
             <span asp-validation-for="LastName" class="text-danger"></span>
         </div>
-    <div class="mb-3">
-        <label class="form-label" asp-for="Email"></label>
-        <input class="form-control" asp-for="Email" aria-describedby="emailHelp">
-        <span asp-validation-for="Email" class="text-danger"></span>
-    </div>
-    <div class="mb-3">
-        <label class="form-label" asp-for="Password"></label>
-        <input class="form-control" asp-for="Password" aria-describedby="emailHelp">
-        <span asp-validation-for="Password" class="text-danger"></span>
-    </div>
-    <div class="mb-3">
-        <label class="form-label" asp-for="ConfirmPassword"></label>
-        <input class="form-control" asp-for="ConfirmPassword" >
-        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+        <div class="mb-3">
+            <label class="form-label" asp-for="Email"></label>
+            <input class="form-control" asp-for="Email" aria-describedby="emailHelp">
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" asp-for="Password"></label>
+            <input class="form-control" asp-for="Password" aria-describedby="emailHelp">
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" asp-for="ConfirmPassword"></label>
+            <input class="form-control" asp-for="ConfirmPassword">
+            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
 </div>

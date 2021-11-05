@@ -38,34 +38,6 @@ namespace BookStore.Controllers
         public BookModel Book { get; set; }
         public async Task<ViewResult> Index()
         {
-            // var client = new SmtpClient("smtp.mailtrap.io", 2525)
-            // {
-            //     Credentials = new NetworkCredential("9a403a46310b41", "16e28e18036665"),
-            //     EnableSsl = true
-            // };
-            // client.Send("from@example.com", "to@example.com", "Hello world", "testbody");
-            // Console.WriteLine("Sent");
-            // Console.ReadLine();
-            var smtpConfigModel = _smtpConfig;
-            Console.WriteLine(smtpConfigModel);
-            Console.WriteLine(smtpConfigModel.Host);
-            Console.WriteLine(smtpConfigModel.Password);
-            Console.WriteLine(smtpConfigModel.Port);
-            Console.WriteLine(smtpConfigModel.SenderAddress);
-            Console.WriteLine(smtpConfigModel.UserName);
-            Console.WriteLine(smtpConfigModel.SenderDisplayName);
-            Console.WriteLine(smtpConfigModel.UseDefaultCredentials);
-            Console.WriteLine(smtpConfigModel.EnableSSL);
-            Console.WriteLine(smtpConfigModel.IsBodyHTML);
-            UserEmailOptions options = new UserEmailOptions
-            {
-                ToEmails = new List<string>() {"test@gmail.com"},
-                PlaceHolders = new List<KeyValuePair<string, string>>()
-                {
-                    new KeyValuePair<string, string>("{{UserName}}", "ahabdu")
-                }
-            };
-            await _emailService.SendTestEmail(options);
             // var userId = _userService.GetUserId();
             // var isUserLoggedIn = _userService.IsAuthenticated();
             

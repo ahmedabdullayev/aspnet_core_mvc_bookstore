@@ -34,7 +34,7 @@ namespace BookStore
             services.AddDbContext<BookStoreContext>(options => options.UseSqlServer(_configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<BookStoreContext>(); // signup user etc
+                .AddEntityFrameworkStores<BookStoreContext>().AddDefaultTokenProviders(); // signup user etc
             services.Configure<IdentityOptions>(options => // lambda expression
             {
                 options.Password.RequiredLength = 5;
@@ -43,6 +43,8 @@ namespace BookStore
                 options.Password.RequireLowercase = false;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
+
+                options.SignIn.RequireConfirmedEmail = true;
             });
             
             services.AddControllersWithViews();

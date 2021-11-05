@@ -23,7 +23,14 @@ namespace BookStore.Services
             await SendEmail(userEmailOptions);
         }
         
+        public async Task SendEmailForConfirmation(UserEmailOptions userEmailOptions)
+        {
+            userEmailOptions.Subject = UpdatePlaceHolders("Hello {{UserName}}, confirm your email", userEmailOptions.PlaceHolders);
 
+            userEmailOptions.Body = UpdatePlaceHolders(GetEmailBody("EmailConfirm"), userEmailOptions.PlaceHolders);
+
+            await SendEmail(userEmailOptions);
+        }
         public EmailService(IOptions<SMTPConfigModel> smtpConfig)
         {
             _smtpConfig = smtpConfig.Value;

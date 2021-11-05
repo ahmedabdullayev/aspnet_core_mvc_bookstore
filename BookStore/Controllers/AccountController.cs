@@ -16,9 +16,19 @@ namespace BookStore.Controllers
         }
         
         [Route("signup")]
-        public IActionResult Signup()
+        public IActionResult Signup(bool isSuccess = false)
         {
-            return View();
+            var success = new SignUpUserModel(); 
+            if (isSuccess)
+            {
+                success.Success = true;
+            }
+            else
+            {
+                success.Success = false;
+            }
+
+            return View(success);
         }
         
         [Route("signup")]
@@ -34,6 +44,11 @@ namespace BookStore.Controllers
                     {
                         ModelState.AddModelError("",errorMessage.Description);
                     }
+                }
+                else
+                {
+                    return RedirectToAction("Signup", new {isSuccess = true});
+
                 }
             }
             return View();
@@ -60,7 +75,15 @@ namespace BookStore.Controllers
                     }
                     return RedirectToAction("Index", "Home");
                 }
-                ModelState.AddModelError("", "Invalid Credentials");
+
+                if (result.IsNotAllowed)
+                {
+                    ModelState.AddModelError("", "Not allowed to login! Please confirm email first");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Invalid Credentials");
+                }
             }
             return View();
         }
@@ -91,13 +114,28 @@ namespace BookStore.Controllers
                     ModelState.Clear();
                     return View();
                 }
-
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError("", error.Description);
                 }
             }
             return View();
-        } 
+        }
+
+        [HttpGet("confirm-email")]
+        public async Task<IActionResult> ConfirmEmail(string uid, string token)
+        {
+            if (!string.IsNullOrEmpty(uid) && !string.IsNullOrEmpty(token))
+            {
+                token = token.Replace(" ", "+");
+                var result = await _accountRepository.ConfirmUserEmailAsync(uid, token);
+                if (result.Succeeded)
+                {
+                    ViewBag.IsSuccess = true;
+                }
+            }
+
+            return View();
+        }
     }
 }
