@@ -49,6 +49,9 @@ namespace BookStore.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Author")
                         .HasColumnType("nvarchar(max)");
 
@@ -80,6 +83,8 @@ namespace BookStore.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("LanguageId");
 
@@ -322,11 +327,17 @@ namespace BookStore.Migrations
 
             modelBuilder.Entity("BookStore.Data.Books", b =>
                 {
+                    b.HasOne("BookStore.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany("Books")
+                        .HasForeignKey("ApplicationUserId");
+
                     b.HasOne("BookStore.Data.Language", "Language")
                         .WithMany("Books")
                         .HasForeignKey("LanguageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("ApplicationUser");
 
                     b.Navigation("Language");
                 });
@@ -388,6 +399,11 @@ namespace BookStore.Migrations
                 });
 
             modelBuilder.Entity("BookStore.Data.Language", b =>
+                {
+                    b.Navigation("Books");
+                });
+
+            modelBuilder.Entity("BookStore.Models.ApplicationUser", b =>
                 {
                     b.Navigation("Books");
                 });

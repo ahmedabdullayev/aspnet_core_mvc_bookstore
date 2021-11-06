@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using BookStore.Models;
 
 namespace BookStore.Data
 {
@@ -13,6 +14,9 @@ namespace BookStore.Data
         
         public int LanguageId { get; set; }
         public Language Language { get; set; }
+
+        public string ApplicationUserId { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
 
         public int TotalPages { get; set; }
 

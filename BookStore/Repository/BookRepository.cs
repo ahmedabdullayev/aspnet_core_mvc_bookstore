@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using BookStore.Data;
 using BookStore.Models;
+using BookStore.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.Repository
@@ -11,10 +13,12 @@ namespace BookStore.Repository
     public class BookRepository : IBookRepository
     {
         private readonly BookStoreContext _context;
+        private readonly IUserService _userService;
 
-        public BookRepository(BookStoreContext context)
+        public BookRepository(BookStoreContext context, IUserService userService)
         {
             _context = context;
+            _userService = userService;
         }
         public async Task<int> AddNewBook(BookModel model)
         {
@@ -24,6 +28,7 @@ namespace BookStore.Repository
                 Description = model.Description,
                 Title = model.Title,
                 LanguageId = model.LanguageId ?? 0,
+                ApplicationUserId = _userService.GetUserId(),
                 TotalPages = model.TotalPages ?? 0,
                 CoverImageUrl = model.CoverImageUrl,
                 BookPdfUrl = model.BookPdfUrl,
