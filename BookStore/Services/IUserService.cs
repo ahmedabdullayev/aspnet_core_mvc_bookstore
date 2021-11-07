@@ -4,6 +4,8 @@ namespace BookStore.Services
     {
         string GetUserId();
 
+        string GetUserEmail();
+
         bool IsAuthenticated();
     }
 }

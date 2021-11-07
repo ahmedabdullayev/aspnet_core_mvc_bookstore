@@ -16,9 +16,12 @@
             <span asp-validation-for="Password" class="text-danger"></span>
         </div>
         <div class="mb-3 form-check">
-                <input class="form-check-input" asp-for="RememberMe" /> @Html.DisplayNameFor(model => model.RememberMe)
-                <label class="form-label" asp-for="RememberMe"></label>
+            <input class="form-check-input" asp-for="RememberMe" /> @Html.DisplayNameFor(model => model.RememberMe)
+            <label class="form-label" asp-for="RememberMe"></label>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+    <div>
+        <p><a asp-action="ForgotPassword" asp-controller="Account">Forgot password?</a></p>
+    </div>
 </div>
