@@ -78,6 +78,10 @@ namespace BookStore.Controllers
                 {
                     ModelState.AddModelError("", "Not allowed to login! Please confirm email first");
                 }
+                else if (result.IsLockedOut)
+                {
+                    ModelState.AddModelError("", "Your account is blocked, please login after 20 seconds.");
+                }
                 else
                 {
                     ModelState.AddModelError("", "Invalid Credentials");

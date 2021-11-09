@@ -45,6 +45,9 @@ namespace BookStore
                 options.Password.RequireUppercase = false;
 
                 options.SignIn.RequireConfirmedEmail = true;
+                
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromSeconds(20);
+                options.Lockout.MaxFailedAccessAttempts = 3;
             });
             
             services.AddControllersWithViews();
