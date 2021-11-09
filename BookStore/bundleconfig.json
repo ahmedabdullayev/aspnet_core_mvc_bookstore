@@ -7,7 +7,6 @@
     ],
     "minify": {
       "enabled": true,
-      "renameLocals": true
     }
   }
 ]
