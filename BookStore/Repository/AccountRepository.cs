@@ -12,17 +12,19 @@ namespace BookStore.Repository
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager; 
         private readonly IUserService _userService;
         private readonly IEmailService _emailService;
         private readonly IConfiguration _configuration;
 
-        public AccountRepository(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IUserService userService, IEmailService emailService, IConfiguration configuration)
+        public AccountRepository(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IUserService userService, IEmailService emailService, IConfiguration configuration, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _userService = userService;
             _emailService = emailService;
             _configuration = configuration;
+            _roleManager = roleManager;
         }
 
         public async Task<ApplicationUser> GetUserByEmailAsync(string email)
@@ -53,6 +55,16 @@ namespace BookStore.Repository
           return result;
         }
 
+        private async Task<IdentityResult> GiveUserRoleToUser(ApplicationUser user)
+        {
+            var userRoleExistsAsync = await _roleManager.RoleExistsAsync("user");
+            if (!userRoleExistsAsync)
+            { 
+                await _roleManager.CreateAsync(new IdentityRole("user"));
+            }
+
+            return await _userManager.AddToRoleAsync(user, "user");
+        }
         public async Task GenerateUserEmailConfirmationTokenAsync(ApplicationUser user)
         {
             var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -91,7 +103,9 @@ namespace BookStore.Repository
         
         public async Task<IdentityResult> ConfirmUserEmailAsync(string uid, string token)
         {
-           return await _userManager.ConfirmEmailAsync(await _userManager.FindByIdAsync(uid), token);
+            await _userManager.ConfirmEmailAsync(await _userManager.FindByIdAsync(uid), token);
+            var findByIdAsync = await _userManager.FindByIdAsync(uid);
+            return await GiveUserRoleToUser(findByIdAsync);
         }
 
         public async Task<IdentityResult> ResetUserPasswordAsync(ResetPasswordModel resetPasswordModel)

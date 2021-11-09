@@ -59,6 +59,7 @@ namespace BookStore
             services.ConfigureApplicationCookie(config =>
             {
                 config.LoginPath = "/login";
+                config.AccessDeniedPath = "/signup";
             });
 
             // Relationship for model and appsettings:SMTPConfig section,FOR EMAIL SEND

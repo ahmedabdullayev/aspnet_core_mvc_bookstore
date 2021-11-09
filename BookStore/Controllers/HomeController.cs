@@ -49,7 +49,7 @@ namespace BookStore.Controllers
             
             return View();
         }
-        [Authorize]
+        [Authorize(Roles = "user")]
         [Route("about-us/{id?}/{name?}")]
         public ViewResult AboutUs(int? id, string name)
         {
