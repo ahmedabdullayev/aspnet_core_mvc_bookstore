@@ -50,6 +50,12 @@ namespace BookStore
                 options.Lockout.MaxFailedAccessAttempts = 3;
             });
             
+            //verification token lifetime
+            services.Configure<DataProtectionTokenProviderOptions>(options =>
+            {
+                options.TokenLifespan = TimeSpan.FromDays(7);
+            });
+            
             services.AddControllersWithViews();
             services.AddRazorPages().AddRazorRuntimeCompilation();
                  // TO REMOVE CLIENt SIDE VALIDATIONS ↓
